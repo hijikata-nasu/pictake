@@ -1,0 +1,19 @@
+<resources>
+    <!--アプリの名前と説明-->
+    <string name="app_name">Pictake</string>
+    <string name="title_activity_main">Pictake</string>
+    <string name="action_take_pictogram">Pictake</string>    <!--ピクトグラムを撮る-->
+
+    <!--マップ機能の名前と説明-->
+    <string name="title_map">Map</string>
+    <string name="title_map_explanation">Take a pictogram and it will be on the map</string>
+
+    <!--ランキング機能の名前と説明-->
+    <string name="title_ranking">Ranking</string>
+    <string name="title_ranking_explanation">Let\'s meet for struggle</string>
+
+    <!--図鑑機能の名前と説明-->
+    <string name="title_index">Index</string>
+    <string name="title_index_explanation">You can see the pictograms collected so far</string>
+
+</resources>
