@@ -1,2 +1,2 @@
-include ':app', ':sdk'
+include ':app', ':sdk', 'opencv'
 rootProject.name='pictake'

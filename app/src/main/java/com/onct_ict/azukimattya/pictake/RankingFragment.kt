@@ -7,10 +7,52 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.ViewPager
+import kotlinx.android.synthetic.main.fragment_ranking.*
 
 class RankingFragment : Fragment() {
+
+    internal var viewPager: ViewPager? = null
+    internal var viewPagerAdapter: ViewPagerAdapter? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        return  inflater.inflate(R.layout.fragment_ranking, container, false)
+        val view = inflater.inflate(R.layout.fragment_ranking, container, false)
+        viewPager = view.findViewById(R.id.viewpager)
+        viewPagerAdapter = ViewPagerAdapter(childFragmentManager)
+        viewPager!!.adapter = viewPagerAdapter
+        return view
+    }
+
+    class ViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+
+        override fun getCount(): Int {
+            return 2
+        }
+
+        override fun getItem(position: Int): Fragment {
+            when (position) {
+                0 -> {
+                    return RankingCollectFragment()
+                }
+                else -> {
+                    return RankingStepFragment()
+                }
+            }
+        }
+
+        override fun getPageTitle(position: Int): CharSequence? {
+            when (position) {
+                0 -> {
+                    return "Collected"
+                }
+                else -> {
+                    return "Steps"
+                }
+            }
+        }
     }
 }

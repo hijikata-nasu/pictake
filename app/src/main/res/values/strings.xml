@@ -11,9 +11,62 @@
     <!--ランキング機能の名前と説明-->
     <string name="title_ranking">Ranking</string>
     <string name="title_ranking_explanation">Let\'s meet for struggle</string>
+    <string name="ranking_title_collect">Collected</string>
+    <string name="ranking_title_step">Steps</string>
 
     <!--図鑑機能の名前と説明-->
     <string name="title_index">Index</string>
     <string name="title_index_explanation">You can see the pictograms collected so far</string>
+    <string name="title_activity_camera">CameraActivity</string>
+
+    <integer-array name="pict_list">
+        <item>@drawable/pict001</item>
+        <item>@drawable/pict002</item>
+        <item>@drawable/pict003</item>
+        <item>@drawable/pict004</item>
+        <item>@drawable/pict005</item>
+        <item>@drawable/pict006</item>
+        <item>@drawable/pict007</item>
+        <item>@drawable/pict008</item>
+        <item>@drawable/pict009</item>
+        <item>@drawable/pict010</item>
+        <item>@drawable/pict011</item>
+        <item>@drawable/pict012</item>
+        <item>@drawable/pict013</item>
+        <item>@drawable/pict014</item>
+        <item>@drawable/pict015</item>
+        <item>@drawable/pict016</item>
+        <item>@drawable/pict017</item>
+        <item>@drawable/pict018</item>
+        <item>@drawable/pict019</item>
+        <item>@drawable/pict020</item>
+        <item>@drawable/pict021</item>
+        <item>@drawable/pict022</item>
+    </integer-array>
+
+    <string-array name="picttext">
+        <item>Men\&apos;s restroom</item>
+        <item>Multipurpose toilet</item>
+        <item>Women\&apos;s toilet</item>
+        <item>Toilet</item>
+        <item>Facilities for the disabled</item>
+        <item>Phone</item>
+        <item>Elevator</item>
+        <item>Staircase</item>
+        <item>Restaurants</item>
+        <item>Smoking area</item>
+        <item>Reception</item>
+        <item>Drinking water</item>
+        <item>Men\&apos;s changing room</item>
+        <item>Women\&apos;s changing room</item>
+        <item>Shower room</item>
+        <item>Bathroom</item>
+        <item>Drinking fountains</item>
+        <item>Bicycle</item>
+        <item>Coin locker</item>
+        <item>Rest area</item>
+        <item>Escalator</item>
+        <item>Infant equipment</item>
+    </string-array>
 
 </resources>
