@@ -128,7 +128,7 @@ class CameraActivity : AppCompatActivity() {
                 val bmp = textureView.bitmap
                 // 画像をクラスにいったん保存
                 val data = this.application as MoveData
-                data?.obj = bmp
+                data.obj = bmp
 
                 val pict = Intent(application, ImageProcessActivity::class.java)
                 startActivity(pict)

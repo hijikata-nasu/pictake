@@ -117,7 +117,7 @@ class ImageProcessActivity : AppCompatActivity(), LocationListener {
             val res = pictArray.getResourceId(sub, -1)
             // 比較用画像
             val bmp = BitmapFactory.decodeResource(resources, res)
-            // opencvで扱える形式に変更
+            // openCVで扱える形式に変更
             val img = Mat()
             Utils.bitmapToMat(bmp, img)
 
