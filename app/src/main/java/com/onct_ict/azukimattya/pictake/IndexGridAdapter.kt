@@ -18,7 +18,7 @@ internal constructor(
 ) : BaseAdapter() {
 
     private var imageList = ArrayList<Int>()
-    private val inflater: LayoutInflater
+    private val inflater: LayoutInflater? = null
 
     internal inner class ViewHolder {
         var imageView: ImageView? = null
@@ -36,7 +36,7 @@ internal constructor(
         val holder: ViewHolder
         if (convertView == null) {
             // main.xml の <GridView .../> に grid_items.xml を inflate して convertView とする
-            convertView = inflater.inflate(layoutId, parent, false)
+            convertView = inflater!!.inflate(layoutId, parent, false)
             // ViewHolder を生成
             holder = ViewHolder()
 

@@ -1,6 +1,7 @@
 package com.onct_ict.azukimattya.pictake
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ class IndexFragment : Fragment() {
 
     //表示する画像の名前(拡張子は無し)
     private val members = arrayOf(
-        "pict001",
+        "gide",
         "pict002",
         "pict003",
         "pict004",
@@ -39,6 +40,7 @@ class IndexFragment : Fragment() {
     private val imgList = ArrayList<Int>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.d("デバック", "IndexFragmentのonCreateViewが始まった") // fixme デバッグ用
         super.onCreateView(inflater, container, savedInstanceState)
         val view: View = inflater.inflate(R.layout.fragment_index, container, false)
 
@@ -49,16 +51,15 @@ class IndexFragment : Fragment() {
         }
 
         // GridViewのインスタンスを生成
-        val gridViewIndex = view.findViewById<GridView>(R.id.gridViewIndex)
+        val gridViewIndex: GridView = view.findViewById<GridView>(R.id.gridViewIndex)
         // BaseAdapter を継承したGridAdapterのインスタンスを生成
         // 子要素のレイアウトファイル grid_items.xml を
         // activity_main.xml に inflate するためにGridAdapterに引数として渡す
-        val adapter = IndexGridAdapter(activity!!.applicationContext, R.layout.grid_items, imgList, members)
+        val customAdapter = IndexGridAdapter(activity!!.applicationContext, R.layout.grid_items, imgList, members)
 
         // gridViewにadapterをセット
-        gridViewIndex.setAdapter(adapter)
-
-
+        gridViewIndex.adapter = customAdapter
+        Log.d("デバック", "アダプターはたぶんセットされてる")// fixme デバッグ用
         return  inflater.inflate(R.layout.fragment_index, container, false)
     }
 }
