@@ -1,6 +1,7 @@
 package com.onct_ict.azukimattya.pictake
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,48 +11,45 @@ import android.widget.TextView
 import java.util.ArrayList
 
 class IndexGridAdapter// 引数がMainActivityからの設定と合わせる
-internal constructor(
-    context: Context,
-    private val layoutId: Int,
-    iList: ArrayList<Int>,
-    private val names: Array<String>
-) : BaseAdapter() {
+internal constructor( context: Context, private val layoutId: Int, iList: ArrayList<Int>, private val names: Array<String> ) : BaseAdapter() {
 
-    private var imageList = ArrayList<Int>()
-    private val inflater: LayoutInflater? = null
+    var context = context
+    var imageList = iList
+    var name = names
 
     internal inner class ViewHolder {
         var imageView: ImageView? = null
         var textView: TextView? = null
     }
 
-    init {
-        this.inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        imageList = iList
-    }
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var convertView = convertView
+        var indexView = convertView
+        var holder: ViewHolder
 
-        val holder: ViewHolder
-        if (convertView == null) {
+        if (indexView == null) {
+
+            Log.d("デバック", "IndexGridAfaptertのindexViewはnull") // fixme デバッグ用
+
+            val indexInflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
             // main.xml の <GridView .../> に grid_items.xml を inflate して convertView とする
-            convertView = inflater!!.inflate(layoutId, parent, false)
+            indexView = indexInflater.inflate(layoutId, parent, false)
             // ViewHolder を生成
             holder = ViewHolder()
 
-            holder.imageView = convertView!!.findViewById(R.id.image_view)
-            holder.textView = convertView.findViewById(R.id.text_view)
+            holder.imageView = indexView!!.findViewById<ImageView>(R.id.image_view) as ImageView
+            holder.textView = indexView!!.findViewById<TextView>(R.id.text_view) as TextView
 
-            convertView.tag = holder
+            indexView.tag = holder
         } else {
-            holder = convertView.tag as ViewHolder
+            holder = indexView.tag as ViewHolder
         }
 
         holder.imageView!!.setImageResource(imageList[position])
-        holder.textView!!.text = names[position]
+        holder.textView!!.text = name[position]
 
-        return convertView
+        return indexView
     }
 
     override fun getCount(): Int {

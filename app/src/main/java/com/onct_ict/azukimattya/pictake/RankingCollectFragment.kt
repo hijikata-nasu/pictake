@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 
 class RankingCollectFragment: Fragment(){
 
-    private val collectItem = arrayOf("a", "b", "c", "c", "d", "e")
+    private val collectItem = arrayOf("a", "b", "c", "c", "d", "e") // fixme 実験用の適当なデータ
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_ranking_collect, container, false)
