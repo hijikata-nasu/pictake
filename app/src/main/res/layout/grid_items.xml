@@ -8,9 +8,9 @@ android:padding="3dp" >
 <ImageView
     android:id="@+id/image_view"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="150dp"
     android:scaleType="centerCrop"
-    android:contentDescription="aaaa"/><!-- fixme ここはどんな表示がされるのかのテスト用です。-->
+    android:contentDescription="NoImage"/>
 
 
 <TextView

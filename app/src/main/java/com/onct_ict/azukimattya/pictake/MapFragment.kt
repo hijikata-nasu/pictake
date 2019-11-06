@@ -25,7 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapFragment : SupportMapFragment(), OnMapReadyCallback, LocationListener{
+class MapFragment : SupportMapFragment(){
 
     private lateinit var mMap: GoogleMap
     var Coordinates: LatLng? = null
@@ -107,7 +107,6 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, LocationListener{
             )
             return
         }
-        */ //fixme
 
         // 位置情報を管理している LocationManager のインスタンスを生成する
         private val locationManager: LocationManager = getSystemService(activity!!.applicationContext.LOCATION_SERVICE) as LocationManager
@@ -168,4 +167,5 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, LocationListener{
         // 利用可能なプロバイダの利用状態が変化したときに呼ばれる
     }
     /**　ここまで位置情報関連の関数　**/
+     */ //fixme
 }
