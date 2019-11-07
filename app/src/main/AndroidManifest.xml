@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".MoveData">
+        android:name=".MoveData"
+        android:usesCleartextTraffic="true" >
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -46,5 +47,5 @@
             android:label="@string/title_activity_camera"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
