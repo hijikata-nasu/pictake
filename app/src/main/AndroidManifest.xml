@@ -31,11 +31,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ImageProcessActivity" />
-        <activity
-            android:name=".CameraActivity"
-            android:label="@string/title_activity_camera"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,6 +38,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".IndexDetailsActivity"></activity>
+        <activity android:name=".ImageProcessActivity" />
+        <activity
+            android:name=".CameraActivity"
+            android:label="@string/title_activity_camera"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

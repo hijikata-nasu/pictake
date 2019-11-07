@@ -63,7 +63,7 @@ class RankingCollectFragment: Fragment(){
 
             rankingView.rankValue.text = listItem.rankValue.toString()
             rankingView.userName.text = listItem.userName
-            rankingView.scoreValue.text = listItem.scoreValue.toString()
+            rankingView.scoreValue.text = listItem.scoreValue.toString() + " Picts"
 
             return rankingView
         }

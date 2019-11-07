@@ -1,6 +1,7 @@
 package com.onct_ict.azukimattya.pictake
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -43,7 +44,7 @@ class IndexFragment : Fragment() {
         indexList.add(IndexItems("pict020", R.drawable.pict020))
         indexList.add(IndexItems("pict021", R.drawable.pict021))
         indexList.add(IndexItems("pict022", R.drawable.pict022))
-        indexList.add(IndexItems("", R.drawable.pict022))
+        indexList.add(IndexItems("", 0))
         indexList.add(IndexItems("", 0))
         indexList.add(IndexItems("", 0))
         indexList.add(IndexItems("", 0))
@@ -82,6 +83,12 @@ class IndexFragment : Fragment() {
 
             var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var indexView = inflator.inflate(R.layout.grid_items, null)
+            indexView.image_view.setOnClickListener {
+                val intent = Intent(context, IndexDetailsActivity::class.java)
+                intent.putExtra("name", gridItem.name!!)
+                intent.putExtra("image", gridItem.image!!)
+                context!!.startActivity(intent)
+            }
             indexView.image_view.setImageResource(gridItem.image!!)
             indexView.text_view.text = gridItem.name!!
 

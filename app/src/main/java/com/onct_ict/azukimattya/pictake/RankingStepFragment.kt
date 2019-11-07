@@ -29,6 +29,18 @@ class RankingStepFragment: Fragment(){
         collectRankingList.add(RankingItems(4, "kaito", 114514))
         collectRankingList.add(RankingItems(5, "kaito", 114514))
         collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
+        collectRankingList.add(RankingItems(6, "kaito", 114514))
         adapter = CollectRankingListAdapter(activity!!, collectRankingList)
 
         listCollectRanking.adapter = adapter
@@ -63,7 +75,7 @@ class RankingStepFragment: Fragment(){
 
             rankingView.rankValue.text = listItem.rankValue.toString()
             rankingView.userName.text = listItem.userName
-            rankingView.scoreValue.text = listItem.scoreValue.toString()
+            rankingView.scoreValue.text = listItem.scoreValue.toString() + " Steps"
 
             return rankingView
         }
