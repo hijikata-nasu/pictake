@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.*
 import android.content.pm.PackageManager
 import android.location.*
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -16,6 +15,7 @@ import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.GoogleMap
 import androidx.appcompat.app.AlertDialog
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.SupportMapFragment
@@ -24,14 +24,23 @@ import com.google.android.gms.maps.SupportMapFragment
 
 
 
-class MapFragment : SupportMapFragment(), OnMapReadyCallback, LocationListener {
+class MapFragment : Fragment(), OnMapReadyCallback, LocationListener {
     private lateinit var mMap: GoogleMap
     private var coordinates: LatLng? = null
 
+    companion object{
+        var mapFragment: SupportMapFragment? = null
+        fun newInstance() = MapFragment()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.d("hoge", "onCreateView")
+        Log.d("MapFragment", "onCreateView")
         super.onCreateView(inflater, container, savedInstanceState)
         getLocation()
+
+        mapFragment = childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
+
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
@@ -41,7 +50,7 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, LocationListener {
     private var locationProvider: String? = null
 
     private fun getLocation() {
-        Log.d("hoge", "getLocation")
+        Log.d("MapFragment", "getLocation")
         // Fine か Coarseのいずれかのパーミッションが得られているかチェックする
         // 本来なら、Android6.0以上かそうでないかで実装を分ける必要がある
         // fixme 出来ればここの関数内のパーミッション要求は消したい(onCreateで書いてるため)
@@ -94,7 +103,7 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, LocationListener {
 
         if (location != null) {
             coordinates = LatLng(location.latitude, location.longitude)
-            Log.d("kaisei", "" + location.latitude + "," + location.longitude)
+            Log.d("MapFragment", "" + location.latitude + "," + location.longitude)
         }
     }
 
@@ -108,17 +117,16 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, LocationListener {
      * installed Google Play services and returned to the app.
      */
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        Log.d("hoge", "onMapReady")
-        this.mMap = googleMap
+    override fun onMapReady(googleMap: GoogleMap?) {
+        Log.d("MapFragment", "onMapReady")
+        mMap = googleMap!!
         val data = activity!!.application as MoveData
 
-        // Add a marker in Sydney and move the camera
         if (coordinates != null) {
             (data.list).forEach { position ->
                 var cnt = 0
                 mMap.addMarker(MarkerOptions().position(position).title(data.str[cnt]))
-                Log.d("hoge", data.str[cnt])
+                Log.d("MapFragment", data.str[cnt])
                 cnt += 1
             }
             val cUpdate = CameraUpdateFactory.newLatLngZoom(coordinates, 19f)
@@ -131,7 +139,7 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, LocationListener {
                 iv.scaleType = ImageView.ScaleType.FIT_XY
                 iv.adjustViewBounds = true
 
-                Log.d("bantyo", sub.toString())
+                Log.d("MapFragment", sub.toString())
                 val show = AlertDialog.Builder(this.activity!!).setView(iv).setPositiveButton("close") { _, _ -> }.show()
                 false
             }
@@ -141,28 +149,27 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, LocationListener {
     }
 
     override fun onLocationChanged(location: Location?) {
-        Log.d("hoge", "onLocationChanged")
+        Log.d("MapFragment", "onLocationChanged")
         coordinates = LatLng(location!!.latitude, location.longitude)
         Log.d("kaisei", coordinates.toString())
     }
     override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
-        Log.d("hoge", "onStatusChanged")
+        Log.d("MapFragment", "onStatusChanged")
         // TODO Auto-generated method stub
     }
 
     override fun onProviderEnabled(provider: String) {
-        Log.d("hoge", "onProviderEnabled")
+        Log.d("MapFragment", "onProviderEnabled")
         // TODO Auto-generated method stub
     }
 
     override fun onProviderDisabled(provider: String) {
-        Log.d("hoge", "onProviderDisabled")
+        Log.d("MapFragment", "onProviderDisabled")
         // TODO Auto-generated method stub
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d("hoge", "onViewCreated")
+        Log.d("MapFragment", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
-        getMapAsync(this)
     }
 }
