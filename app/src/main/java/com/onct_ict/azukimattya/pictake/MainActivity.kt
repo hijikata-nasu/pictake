@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.d("MapFragment", "main")
+
         /** 位置情報のパーミッション要求 **/
         // Fine か Coarseのいずれかのパーミッションが得られているかチェックする
         if (ActivityCompat.checkSelfPermission(

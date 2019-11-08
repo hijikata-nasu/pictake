@@ -31,6 +31,8 @@ class CameraActivity : AppCompatActivity() {
         OpenCVLoader.initDebug()
         LoaderCallback(this).onManagerConnected(LoaderCallbackInterface.SUCCESS)
 
+        getSupportActionBar()!!.setTitle("Take Pictgram")
+
     }
 
     override fun onResume() {

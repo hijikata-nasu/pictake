@@ -9,9 +9,12 @@ class MoveData : Application() {
     private val TAG = "APPLICATION"
     // 撮影した画像データ
     var obj: Bitmap? = null
+    // 撮影した場所の座標
     var list: MutableList<LatLng> = mutableListOf()
+    // 撮影した日時
     var str: MutableList<String> = mutableListOf()
-    var bmp: MutableList<Bitmap> = mutableListOf()
+    // 撮影した種類
+    var bmpnum: MutableList<Int> = mutableListOf()
 
     override fun onCreate() {
         super.onCreate()

@@ -3,11 +3,13 @@ package com.onct_ict.azukimattya.pictake
 import android.Manifest
 import android.content.*
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.*
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.*
+import android.widget.ImageButton
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.maps.*
 
@@ -15,9 +17,8 @@ import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.GoogleMap
 import androidx.appcompat.app.AlertDialog
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.SupportMapFragment
 
 
@@ -36,10 +37,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d("MapFragment", "onCreateView")
         super.onCreateView(inflater, container, savedInstanceState)
-        getLocation()
 
-        mapFragment = childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
 
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
@@ -53,6 +51,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationListener {
         Log.d("MapFragment", "getLocation")
         // Fine か Coarseのいずれかのパーミッションが得られているかチェックする
         // 本来なら、Android6.0以上かそうでないかで実装を分ける必要がある
+
         // fixme 出来ればここの関数内のパーミッション要求は消したい(onCreateで書いてるため)
         if (ActivityCompat.checkSelfPermission(
                 this.activity!!,
@@ -107,20 +106,14 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationListener {
         }
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
 
-    override fun onMapReady(googleMap: GoogleMap?) {
+    override fun onMapReady(googleMap: GoogleMap) {
         Log.d("MapFragment", "onMapReady")
-        mMap = googleMap!!
+        mMap = googleMap
         val data = activity!!.application as MoveData
+        // ピクトグラムの説明文（名前）
+        val pictName = resources.getStringArray(R.array.picttext)
+
 
         if (coordinates != null) {
             (data.list).forEach { position ->
@@ -135,13 +128,26 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationListener {
             mMap.setOnMarkerClickListener { marker ->
                 val sub = marker.id.replace("m", "").toInt()
                 val iv = ImageView(this.activity)
-                iv.setImageBitmap(data.bmp[sub])
-                iv.scaleType = ImageView.ScaleType.FIT_XY
+                iv.setImageBitmap(BitmapFactory.decodeResource(resources, data.bmpnum[sub]))
+                //iv.scaleType = ImageView.ScaleType.FIT_XY
                 iv.adjustViewBounds = true
 
+                val name = pictName[sub]
+
                 Log.d("MapFragment", sub.toString())
-                val show = AlertDialog.Builder(this.activity!!).setView(iv).setPositiveButton("close") { _, _ -> }.show()
+
+                // ダイアログタイトルの編集
+                val title = TextView(context)
+
+                title.setText(name)
+                title.setTextSize(30.0f)
+                title.setGravity( Gravity.CENTER_HORIZONTAL )
+
+                AlertDialog.Builder(this.activity!!).setCustomTitle(title).setView(iv).setPositiveButton("close") { _, _ ->
+
+                }.show()
                 false
+
             }
             mMap.moveCamera(cUpdate)
             mMap.isMyLocationEnabled = true
@@ -171,5 +177,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d("MapFragment", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
+
+        getLocation()
+
+        mapFragment = childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
     }
 }
