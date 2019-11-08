@@ -14,12 +14,12 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="412dp"
-            android:layout_height="337dp"
+            android:layout_width="303dp"
+            android:layout_height="270dp"
+            android:layout_marginTop="40dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,8 +27,8 @@
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:text="戻る"
+            android:layout_marginBottom="48dp"
+            android:text="back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -38,7 +38,6 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/back_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

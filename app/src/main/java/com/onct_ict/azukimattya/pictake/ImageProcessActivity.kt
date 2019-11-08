@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.graphics.Typeface
 import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.Gravity
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -171,7 +173,15 @@ class ImageProcessActivity : AppCompatActivity(), LocationListener {
             getLocation()
             // 画像をセット
             imageView?.setImageBitmap(bmp)
+            text?.setTextSize(20.0f)
             text?.setText(pictName[maxsub])
+            text?.setGravity(Gravity.CENTER_VERTICAL)
+        }
+
+        if (maxsub == -1) {
+            text?.setText("Recognition Failure")
+            text?.setTextSize(36.0f)
+            text?.setTypeface(Typeface.SANS_SERIF)
         }
         pictArray.recycle()
     }

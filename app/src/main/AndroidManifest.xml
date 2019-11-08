@@ -44,8 +44,8 @@
         <activity android:name=".ImageProcessActivity" />
         <activity
             android:name=".CameraActivity"
-            android:label="@string/title_activity_camera"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_camera"/>
+        <!--android:theme="@style/AppTheme.NoActionBar"/>-->
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
