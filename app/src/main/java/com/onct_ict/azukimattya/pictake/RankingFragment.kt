@@ -15,7 +15,7 @@ class RankingFragment : Fragment() {
     internal var viewPagerAdapter: ViewPagerAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_ranking, container, false)
+        val view = inflater.inflate(R.layout.fragment_ranking_tab, container, false)
         viewPager = view.findViewById(R.id.viewpager)
         viewPagerAdapter = ViewPagerAdapter(childFragmentManager)
         viewPager!!.adapter = viewPagerAdapter

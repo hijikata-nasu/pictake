@@ -39,7 +39,12 @@ class RankingCollectFragment: Fragment(){
             baseParams = listOf("key" to "value")
         }
 
-        GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) {
+        // 自分のランキングを表示する
+        view.findViewById<TextView>(R.id.myRankValue).text = "15"
+        view.findViewById<TextView>(R.id.myUserName).text = "cmyUE"
+        view.findViewById<TextView>(R.id.myScoreValue).text = "0"
+
+            GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) {
             getCollect()
         }
     }

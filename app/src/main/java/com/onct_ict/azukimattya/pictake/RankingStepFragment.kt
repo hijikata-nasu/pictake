@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.ListView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelError
@@ -41,6 +42,11 @@ class RankingStepFragment: Fragment(){
             baseHeaders = mapOf("Device" to "Android")
             baseParams = listOf("key" to "value")
         }
+
+        // 自分のランキングを表示する
+        view.findViewById<TextView>(R.id.myRankValue).text = "15"
+        view.findViewById<TextView>(R.id.myUserName).text = "cmyUE"
+        view.findViewById<TextView>(R.id.myScoreValue).text = "0"
 
         GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) {
             getStep()
