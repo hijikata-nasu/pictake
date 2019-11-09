@@ -17,7 +17,8 @@
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:background="#FFF">
 
         <TextView
             android:id="@+id/myRankValue"
@@ -35,6 +36,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:text="userName" />
+
         <TextView
             android:id="@+id/myScoreValue"
             android:layout_width="wrap_content"

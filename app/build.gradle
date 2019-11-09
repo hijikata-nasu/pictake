@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    /*
     signingConfigs {
         debug {
             storeFile file('C:\\Users\\wakimiko\\AndroidStudioProjects\\pikutoru\\keystore\\release.jks')
@@ -18,7 +19,7 @@ android {
             keyAlias = 'pikutoru'
             keyPassword 'LL6qLm2H'
         }
-    }
+    }*/
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {

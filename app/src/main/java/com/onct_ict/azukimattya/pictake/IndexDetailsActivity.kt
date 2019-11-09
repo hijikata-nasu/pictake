@@ -13,6 +13,6 @@ class IndexDetailsActivity: AppCompatActivity(){
         val bundle = intent.extras
 
         imgFoodDetails.setImageResource(bundle!!.getInt("image"))
-        tvName.text = bundle!!.getString("name")
+        tvName.text = bundle.getString("name")
     }
 }

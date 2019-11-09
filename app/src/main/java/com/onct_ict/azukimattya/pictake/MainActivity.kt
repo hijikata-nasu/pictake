@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.github.kittinunf.fuel.core.FuelManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        FuelManager.instance.basePath = "http://192.168.43.230:8080"
 
         Log.d("MapFragment", "main")
 
@@ -46,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         setupWithNavController(bottom_navigation, navController)
 
-        fab.setOnClickListener{ view ->
+        fab.setOnClickListener{
             Log.d("MainActivity", "FaBが押されました")
             val intent = Intent(this, CameraActivity::class.java)
             startActivity(intent)

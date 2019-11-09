@@ -37,11 +37,6 @@ class RankingStepFragment: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        FuelManager.instance.apply {
-            basePath = "http://192.168.1.11:8080"
-            baseHeaders = mapOf("Device" to "Android")
-            baseParams = listOf("key" to "value")
-        }
 
         // 自分のランキングを表示する
         view.findViewById<TextView>(R.id.myRankValue).text = "15"

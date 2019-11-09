@@ -33,18 +33,13 @@ class RankingCollectFragment: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        FuelManager.instance.apply {
-            basePath = "http://192.168.1.11:8080"
-            baseHeaders = mapOf("Device" to "Android")
-            baseParams = listOf("key" to "value")
-        }
 
         // 自分のランキングを表示する
         view.findViewById<TextView>(R.id.myRankValue).text = "15"
         view.findViewById<TextView>(R.id.myUserName).text = "cmyUE"
         view.findViewById<TextView>(R.id.myScoreValue).text = "0"
 
-            GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) {
+        GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) {
             getCollect()
         }
     }
@@ -85,10 +80,11 @@ class RankingCollectFragment: Fragment(){
     }
 
     private suspend fun getCollect() {
-        val (_, response, result) = Fuel.get("/ranking/collects").awaitStringResponseResult()
+        val (_, _, result) = Fuel.get("/ranking/collects").awaitStringResponseResult()
         Log.d("huga", result.toString())
         update(result)
     }
+
     private fun <T : Any> update(result: Result<T, FuelError>) {
         result.fold(success = {
             val jsonAdapter: JsonAdapter<List<RankingItems>> = Moshi.Builder().add(KotlinJsonAdapterFactory()).build().adapter(
