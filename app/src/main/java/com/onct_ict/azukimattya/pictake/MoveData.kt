@@ -16,6 +16,7 @@ class MoveData : Application() {
     // 撮影した種類
     var bmpnum: MutableList<Int> = mutableListOf()
 
+
     override fun onCreate() {
         super.onCreate()
         //Application作成時

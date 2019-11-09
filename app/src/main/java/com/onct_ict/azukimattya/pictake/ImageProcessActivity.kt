@@ -169,7 +169,7 @@ class ImageProcessActivity : AppCompatActivity(), LocationListener {
         if (maxsub != -1) {
             val res = pictArray.getResourceId(maxsub, -1)
             val bmp = BitmapFactory.decodeResource(resources, res)
-            data.bmpnum.add(res)
+            data.bmpnum.add(maxsub)
             getLocation()
             // 画像をセット
             imageView?.setImageBitmap(bmp)

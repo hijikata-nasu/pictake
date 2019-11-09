@@ -1,6 +1,7 @@
 package com.onct_ict.azukimattya.pictake
 
 import android.Manifest
+import android.app.ActionBar
 import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -113,6 +114,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationListener {
         val data = activity!!.application as MoveData
         // ピクトグラムの説明文（名前）
         val pictName = resources.getStringArray(R.array.picttext)
+        val pictArray = resources.obtainTypedArray(R.array.pict_list)
+        val tweet = ImageButton(this.activity)
+        tweet.setImageResource(R.drawable.twitter)
 
 
         if (coordinates != null) {
@@ -127,12 +131,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationListener {
             // マーカーをクリックしたときの動作
             mMap.setOnMarkerClickListener { marker ->
                 val sub = marker.id.replace("m", "").toInt()
+                val res = pictArray.getResourceId(data.bmpnum[sub], -1)
                 val iv = ImageView(this.activity)
-                iv.setImageBitmap(BitmapFactory.decodeResource(resources, data.bmpnum[sub]))
+                iv.setImageBitmap(BitmapFactory.decodeResource(resources, res))
                 //iv.scaleType = ImageView.ScaleType.FIT_XY
                 iv.adjustViewBounds = true
 
-                val name = pictName[sub]
+                val name = pictName[data.bmpnum[sub]]
 
                 Log.d("MapFragment", sub.toString())
 
@@ -142,6 +147,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationListener {
                 title.setText(name)
                 title.setTextSize(30.0f)
                 title.setGravity( Gravity.CENTER_HORIZONTAL )
+
 
                 AlertDialog.Builder(this.activity!!).setCustomTitle(title).setView(iv).setPositiveButton("close") { _, _ ->
 
