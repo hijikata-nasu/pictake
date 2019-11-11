@@ -11,4 +11,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:background="#FFF">
+
+        <TextView
+            android:id="@+id/myRankValue"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="rankValue"/>
+
+        <TextView
+            android:id="@+id/myUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="5"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:text="userName" />
+
+        <TextView
+            android:id="@+id/myScoreValue"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="scoreValue"/>
+
+    </LinearLayout>
+
 </FrameLayout>
