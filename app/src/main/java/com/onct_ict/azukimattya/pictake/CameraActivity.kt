@@ -18,6 +18,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import org.opencv.android.LoaderCallbackInterface
 import org.opencv.android.OpenCVLoader
+import android.widget.RelativeLayout
+import android.util.Log
+import android.view.Display
+
 
 class CameraActivity : AppCompatActivity() {
 
@@ -97,9 +101,12 @@ class CameraActivity : AppCompatActivity() {
         // 画面サイズの取得
         val ds = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(ds)
-
+        val display: Display = getWindowManager().getDefaultDisplay()
+        val size: Point = Point()
+        display.getSize(size)
         val texture = textureView.surfaceTexture
-        texture.setDefaultBufferSize(960, 1280)
+        texture.setDefaultBufferSize(size.x, size.y)
+        Log.d("mazai", "" + size.x + " " + size.y)
         val surface = Surface(texture)
 
         val previewRequestBuilder = cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)

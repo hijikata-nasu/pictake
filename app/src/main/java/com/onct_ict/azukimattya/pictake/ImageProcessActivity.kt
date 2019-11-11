@@ -14,9 +14,13 @@ import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ShareCompat
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.coroutines.awaitStringResponseResult
 import org.opencv.android.BaseLoaderCallback
 import org.opencv.android.LoaderCallbackInterface
 import org.opencv.android.OpenCVLoader
@@ -29,13 +33,29 @@ import org.opencv.imgproc.Imgproc
 import java.text.SimpleDateFormat
 import java.util.*
 import com.google.android.gms.maps.model.LatLng
+import com.onct_ict.azukimattya.pictake.login.Duplicate
+import com.onct_ict.azukimattya.pictake.login.Register
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
+data class No (
+    val address: String,
+    val loc: Int
+)
 
 class ImageProcessActivity : AppCompatActivity(), LocationListener {
 
     var imageView: ImageView? = null
     var button: Button? = null
     var text: TextView? = null
-    val PICT_NUM = 22
+    var imagebutton: ImageButton? = null
+    val PICT_NUM = 25
     val EVALUATION_VALUE =  0.5
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +85,7 @@ class ImageProcessActivity : AppCompatActivity(), LocationListener {
         imageView = this.findViewById(R.id.imageView) as ImageView
         button = this.findViewById(R.id.back_button) as Button
         text = this.findViewById(R.id.textView) as TextView
+        imagebutton = this.findViewById(R.id.imageButton) as ImageButton
     }
 
     // ボタンのイベントとか
@@ -73,6 +94,34 @@ class ImageProcessActivity : AppCompatActivity(), LocationListener {
         button?.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        }
+        val data =this.application as MoveData
+        // ピクトグラムの説明文（名前）
+        val pictName = resources.getStringArray(R.array.picttext)
+        // ボタンを押したときなどの動作を書く
+        imagebutton?.setOnClickListener {
+            /*     val intent = Intent()
+                 intent.setPackage("com.twitter.android")
+                 intent.type = "image/png"
+                 intent.putExtra(Intent.EXTRA_TEXT, "test")
+                 startActivity(intent)*/
+
+            var builder = ShareCompat.IntentBuilder.from(this)
+
+            var imagePath = null
+            var message = "I took " + pictName[data.twtr!!] + " pictgram!"
+            Log.d("tweet", " " + message)
+
+            builder.setChooserTitle("Choose App")
+            builder.setText(message)
+            if(imagePath!=null){
+                builder.setType("image/png")
+                //          builder.addStream(Uri streamUri)
+            }else{
+                builder.setType("text/plain")
+            }
+// アプリ選択画面を起動
+            builder.startChooser()
         }
     }
 
@@ -161,8 +210,9 @@ class ImageProcessActivity : AppCompatActivity(), LocationListener {
                 }
             }
 
+            Log.d("fuck", "" + max + " " + sub)
             sub += 1
-            Log.d("fuck", "" + max)
+
         }
 
         // 認識成功時
@@ -170,15 +220,18 @@ class ImageProcessActivity : AppCompatActivity(), LocationListener {
             val res = pictArray.getResourceId(maxsub, -1)
             val bmp = BitmapFactory.decodeResource(resources, res)
             data.bmpnum.add(maxsub)
+            data.twtr = maxsub
             getLocation()
             // 画像をセット
             imageView?.setImageBitmap(bmp)
             text?.setTextSize(20.0f)
             text?.setText(pictName[maxsub])
             text?.setGravity(Gravity.CENTER_VERTICAL)
+            GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) {
+                addFlag(maxsub)
+            }
         }
-
-        if (maxsub == -1) {
+        else if (maxsub == -1) {
             text?.setText("Recognition Failure")
             text?.setTextSize(36.0f)
             text?.setTypeface(Typeface.SANS_SERIF)
@@ -275,6 +328,13 @@ class ImageProcessActivity : AppCompatActivity(), LocationListener {
         // 利用可能なプロバイダの利用状態が変化したときに呼ばれる
     }
     /**　ここまで位置情報関連の関数　**/
+
+    private suspend fun addFlag (no: Int) {
+        val adapter: JsonAdapter<No> = Moshi.Builder().add(KotlinJsonAdapterFactory()).build().adapter(Types.newParameterizedType(No::class.java))
+        val json = adapter.toJson(No("guest@gmail.com", no))
+        val (_, _, df) = Fuel.post("/addFlag").body(json).awaitStringResponseResult()
+        Log.d("hoge", df.toString())
+    }
 }
 
 class LoaderCallback(activity: AppCompatActivity) : BaseLoaderCallback(activity)

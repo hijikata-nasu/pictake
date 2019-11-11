@@ -37,9 +37,6 @@ class CreateViewModel(private val loginRepository: LoginRepository) : ViewModel(
     val createResult: LiveData<CreateResult> = _createResult
 
     suspend fun create(address: String, password: String, username: String) {
-        FuelManager.instance.apply {
-            basePath = "http://192.168.43.230:8080"
-        }
 
         val regAdapter: JsonAdapter<Register> = Moshi.Builder().add(KotlinJsonAdapterFactory()).build().adapter(Types.newParameterizedType(Register::class.java))
         val dupAdapter: JsonAdapter<Duplicate> = Moshi.Builder().add(KotlinJsonAdapterFactory()).build().adapter(Types.newParameterizedType(Duplicate::class.java))

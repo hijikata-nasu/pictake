@@ -15,6 +15,7 @@ class MoveData : Application() {
     var str: MutableList<String> = mutableListOf()
     // 撮影した種類
     var bmpnum: MutableList<Int> = mutableListOf()
+    var twtr: Int? = null
 
 
     override fun onCreate() {

@@ -42,6 +42,9 @@
         <item>@drawable/pict020</item>
         <item>@drawable/pict021</item>
         <item>@drawable/pict022</item>
+        <item>@drawable/pict023</item>
+        <item>@drawable/pict024</item>
+        <item>@drawable/pict025</item>
     </integer-array>
 
     <string-array name="picttext">
@@ -67,6 +70,9 @@
         <item>Rest area</item>
         <item>Escalator</item>
         <item>Infant equipment</item>
+        <item>Toilet(Awa Dance)</item>
+        <item>Toilet(Kariyushi)</item>
+        <item>Men\&apos;s restroom(Kitarou)</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
 

@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.github.kittinunf.fuel.core.FuelManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_index.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,9 +19,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        FuelManager.instance.basePath = "http://192.168.43.230:8080"
+        FuelManager.instance.basePath = "http://b3b3e6af.ngrok.io"
 
         Log.d("MapFragment", "main")
+
+        val address = intent.getStringExtra("Address")
 
         /** 位置情報のパーミッション要求 **/
         // Fine か Coarseのいずれかのパーミッションが得られているかチェックする

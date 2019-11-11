@@ -8,7 +8,7 @@
         android:label="Fragment1"/>
 
     <fragment android:id="@+id/navi_ranking"
-        android:name="com.onct_ict.azukimattya.pictake.RankingFragment"
+        android:name="com.onct_ict.azukimattya.pictake.RankingCollectFragment"
         android:label="Fragment2"/>
 
     <fragment android:id="@+id/navi_index"

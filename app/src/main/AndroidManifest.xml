@@ -21,18 +21,17 @@
         android:name=".MoveData"
         android:usesCleartextTraffic="true" >
 
+        <!--
         <activity
             android:name=".login.LoginActivity"
             android:label="@string/app_name">
-
-            <!--#fixme
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
-             -->
 
         </activity>
+        -->
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

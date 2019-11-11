@@ -76,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
+                updateUiWithUser(loginResult.success, loginResult.address!!)
             }
             setResult(Activity.RESULT_OK)
 
@@ -177,16 +177,17 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
+    private fun updateUiWithUser(model: LoggedInUserView, address: String) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
-        var intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainActivity()::class.java)
         // TODO : initiate successful logged in experience
         Toast.makeText(
             applicationContext,
             "$welcome $displayName",
             Toast.LENGTH_LONG
         ).show()
+        intent.putExtra("Address", address)
         startActivity(intent)
     }
 

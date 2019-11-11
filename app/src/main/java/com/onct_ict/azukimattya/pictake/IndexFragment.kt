@@ -57,7 +57,10 @@ class IndexFragment : Fragment() {
         IndexItems("pict019", R.drawable.pict019, false),
         IndexItems("pict020", R.drawable.pict020, false),
         IndexItems("pict021", R.drawable.pict021, false),
-        IndexItems("pict022", R.drawable.pict022, false))
+        IndexItems("pict022", R.drawable.pict022, false) ,
+        IndexItems("pict023", R.drawable.pict023, false),
+        IndexItems("pict024", R.drawable.pict024, false),
+        IndexItems("pict025", R.drawable.pict025, false))
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return LayoutInflater.from(container?.context).inflate(R.layout.fragment_index, container, false)
@@ -115,7 +118,7 @@ class IndexFragment : Fragment() {
     }
 
     private suspend fun setIndex() {
-        val address = "taro@gmail.com" //TODO ログインのときのにする
+        val address = "guest@gmail.com" //TODO: 実際のものに合わす
         val (_, _, result) = Fuel.get("/indexer?address="+address).awaitStringResponseResult()
         Log.d("huga", result.toString())
         update(result)

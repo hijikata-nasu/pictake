@@ -38,24 +38,15 @@ class RankingStepFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 自分のランキングを表示する
-        view.findViewById<TextView>(R.id.myRankValue).text = "15"
-        view.findViewById<TextView>(R.id.myUserName).text = "cmyUE"
-        view.findViewById<TextView>(R.id.myScoreValue).text = "0"
-
         GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) {
             getStep()
         }
     }
 
-    class CollectRankingListAdapter: BaseAdapter {
-        var listViewList = ArrayList<RankingItems>()
-        var context: Context? = null
-
-        constructor(context: Context, rankingList: ArrayList<RankingItems>): super() {
-            this.context = context
-            this.listViewList = rankingList
-        }
+    class CollectRankingListAdapter(context: Context, rankingList: ArrayList<RankingItems>) :
+        BaseAdapter() {
+        var listViewList = rankingList
+        var context: Context? = context
 
         override fun getCount(): Int {
             return listViewList.size
@@ -72,8 +63,8 @@ class RankingStepFragment: Fragment(){
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val listItem = this.listViewList[position]
 
-            var inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            var rankingView = inflater.inflate(R.layout.ranking_items, null)
+            val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val rankingView = inflater.inflate(R.layout.ranking_items, null)
 
             rankingView.rankValue.text = listItem.rankValue.toString()
             rankingView.userName.text = listItem.userName
